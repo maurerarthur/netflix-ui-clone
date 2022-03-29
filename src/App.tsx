@@ -1,0 +1,21 @@
+import { useReducer } from 'react'
+import Router from '../router'
+import './App.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+
+import ProfileContext from './context/ProfileContext'
+import { ProfileReducer, ProfileInitialState } from './reducer/ProfileReducer'
+
+const App: React.FC = () => {
+  const [profile, setProfile] = useReducer(ProfileReducer, ProfileInitialState)
+
+  return(
+    <ProfileContext.Provider value={[profile, setProfile]}>
+      <div className="App">
+        <Router />
+      </div>
+    </ProfileContext.Provider>
+  )
+}
+
+export default App
