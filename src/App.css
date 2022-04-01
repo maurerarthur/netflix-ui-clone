@@ -13,6 +13,14 @@ html, body, #root, .App {
   font-family: 'Bebas Neue', cursive;
 }
 
+button {
+  transition: 500ms;
+}
+
+button:disabled {
+  opacity: 0.8;
+}
+
 .bg-black {
   background-color: var(--black);
 }
@@ -29,9 +37,16 @@ html, body, #root, .App {
   cursor: pointer;
 }
 
-.user-avatar {
-  width: 120px;
-  height: 120px;
+.position-absolute {
+  position: absolute;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .input-grey {
@@ -57,4 +72,14 @@ html, body, #root, .App {
   border: none;
   background-color: var(--white);
   color: var(--black);
+}
+
+.red-hover:hover {
+  background-color: var(--red);
+  color: var(--white);
+}
+
+.user-avatar {
+  width: 120px;
+  height: 120px;
 }

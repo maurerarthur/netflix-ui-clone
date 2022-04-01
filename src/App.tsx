@@ -7,10 +7,10 @@ import ProfileContext from './context/ProfileContext'
 import { ProfileReducer, ProfileInitialState } from './reducer/ProfileReducer'
 
 const App: React.FC = () => {
-  const [profile, setProfile] = useReducer(ProfileReducer, ProfileInitialState)
+  const [profile, dispatchProfile] = useReducer(ProfileReducer, ProfileInitialState)
 
   return(
-    <ProfileContext.Provider value={[profile, setProfile]}>
+    <ProfileContext.Provider value={[profile, dispatchProfile]}>
       <div className="App">
         <Router />
       </div>

@@ -1,15 +1,7 @@
-interface IProfileReducerState {
-	avatar: string | null,
-	name: string | null,
-	users: any[]
-}
-
-interface IProfileReducerAction {
-	type: string,
-	payload: {}
-}
+import { IProfileReducerState, IProfileReducerAction } from './Interfaces'
 
 export const ProfileInitialState: IProfileReducerState = {
+  id: 0,
   avatar: null,
   name: null,
 	users: []
@@ -17,16 +9,22 @@ export const ProfileInitialState: IProfileReducerState = {
 
 export function ProfileReducer(state = ProfileInitialState, action: IProfileReducerAction) {
   switch(action.type) {
-		case 'setProfile':
-			const updatedState = { ...state, ...action.payload }
-			state = updatedState
-			return state
     case 'addProfile':
       const newProfile = {
         ...state,
-        users: state.users.concat(action.payload)
+        users: state.users.concat({ ...action.payload, id: Date.now() })
       }
       state = newProfile
+      return state
+    case 'editProfile':
+      const id: number = action.payload.id
+      const users: object[] = state.users.filter(user => user.id != id)
+      const newUsers = users.concat({ ...action.payload, id })
+      const newState = {
+        ...state,
+        users: newUsers
+      }
+      state = newState
       return state
 		default:
 			throw new Error('In order to change the state send an action type and a payload')

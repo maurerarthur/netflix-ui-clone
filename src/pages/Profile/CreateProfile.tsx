@@ -1,18 +1,34 @@
 import { useEffect, useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import ProfileContext from '../../context/ProfileContext'
 import Header from '../../components/Header'
 
 const CreateProfile: React.FC = () => {
   const navigate = useNavigate()
+  const location = useLocation()
 
-  const [, setProfile] = useContext(ProfileContext)
+  const [, dispatchProfile] = useContext(ProfileContext)
 
+  const [isUserEditing, setIsUserEditing] = useState<boolean>(false)
+
+  const [userId, setUserId] = useState<string>('')
   const [userName, setUserName] = useState<string>('')
   const [userAvatar, setUserAvatar] = useState<string>('')
 
   useEffect(() => {
+    const { userState } = location?.state as any || {}
+
+    if(userState) {
+      setIsUserEditing(true)
+
+      setUserId(userState.id)
+      setUserName(userState.name)
+      setUserAvatar(userState.avatar)
+
+      return
+    }
+
     generateAvatar()
   }, [])
 
@@ -22,9 +38,22 @@ const CreateProfile: React.FC = () => {
   }
 
   const handleAddProfile = () => {
-    setProfile({
+    dispatchProfile({
       type: 'addProfile',
       payload: {
+        avatar: userAvatar,
+        name: userName
+      }
+    })
+
+    navigate('/')
+  }
+
+  const handleEditProfile = () => {
+    dispatchProfile({
+      type: 'editProfile',
+      payload: {
+        id: userId,
         avatar: userAvatar,
         name: userName
       }
@@ -48,6 +77,7 @@ const CreateProfile: React.FC = () => {
             type="text"
             className="w-100 m-2 input-grey"
             placeholder="Name"
+            value={userName}
             onChange={event => setUserName(event.target.value)}
           />
         </div>
@@ -62,7 +92,8 @@ const CreateProfile: React.FC = () => {
         <div className="mt-3 d-flex flex-row justify-content-start align-items-center">
           <button
             className="m-1 white-button d-flex justify-content-center align-items-center"
-            onClick={handleAddProfile}
+            disabled={!userName}
+            onClick={isUserEditing ? handleEditProfile : handleAddProfile}
           >
             <h4 className="m-0 p-1">Continue</h4>
           </button>
