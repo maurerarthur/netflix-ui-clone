@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ProfileContext from '../../context/ProfileContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,10 +9,21 @@ import { IUser } from './Interfaces'
 const Profile: React.FC = () => {
   const navigate = useNavigate()
 
-  const [profile] = useContext(ProfileContext)
+  const [profile, dispatchProfile] = useContext(ProfileContext)
   const { users } = profile
 
   const [isManageProfile, setIsManageProfile] = useState<boolean>(false)
+
+  useEffect(() => console.log(profile), [profile]);
+
+  const handleUserAccess = (id: number) => {
+    dispatchProfile({
+      type: 'setProfile',
+      payload: {
+        id
+      }
+    })
+  }
 
 	return(
 		<div className="h-100 d-flex flex-column justify-content-between align-items-center">
@@ -30,6 +41,7 @@ const Profile: React.FC = () => {
                 <div 
                   className="col-4 col-md-4 d-flex flex-column align-items-center cursor-pointer"
                   key={user.id}
+                  onClick={() => handleUserAccess(user.id)}
                 >
                   <div className="d-flex justify-content-center align-items-center position-relative">
                     {isManageProfile && (

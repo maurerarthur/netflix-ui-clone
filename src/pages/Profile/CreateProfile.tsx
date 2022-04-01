@@ -62,12 +62,23 @@ const CreateProfile: React.FC = () => {
     navigate('/')
   }
 
+  const handleDeleteProfile = () => {
+    dispatchProfile({
+      type: 'deleteProfile',
+      payload: {
+        id: userId
+      }
+    })
+
+    navigate('/')
+  }
+
 	return(
 		<div className="h-100 d-flex flex-column justify-content-between align-items-center">
 			<Header />
 			<div className="h-100 d-flex flex-column justify-content-center">
-        <h1 className="white">Add Profile</h1>
-        <h4 className="grey">Add a profile for another person watching Netflix.</h4>
+        <h1 className="white">{isUserEditing ? "Edit Profile" : "Add Profile"}</h1>
+        <h4 className="grey">{isUserEditing ? "Edit" : "Add"} a profile for another person watching Netflix.</h4>
         <div className="d-flex flex-row justify-content-between align-items-center">
           <img
             src={userAvatar}
@@ -89,20 +100,30 @@ const CreateProfile: React.FC = () => {
             Get new avatar
           </button>
         </div>
-        <div className="mt-3 d-flex flex-row justify-content-start align-items-center">
-          <button
-            className="m-1 white-button d-flex justify-content-center align-items-center"
-            disabled={!userName}
-            onClick={isUserEditing ? handleEditProfile : handleAddProfile}
-          >
-            <h4 className="m-0 p-1">Continue</h4>
-          </button>
-          <button
-            className="m-1 black-button d-flex justify-content-center align-items-center"
-            onClick={() => navigate('/')}
-          >
-            <h4 className="m-0 p-1">Cancel</h4>
-          </button>
+        <div className="mt-3 d-flex flex-row justify-content-between align-items-center">
+          <div className="d-flex flex-row">
+            <button
+              className="m-1 white-button d-flex justify-content-center align-items-center"
+              disabled={!userName}
+              onClick={isUserEditing ? handleEditProfile : handleAddProfile}
+            >
+              <h4 className="m-0 p-1">Continue</h4>
+            </button>
+            <button
+              className="m-1 black-button d-flex justify-content-center align-items-center"
+              onClick={() => navigate('/')}
+            >
+              <h4 className="m-0 p-1">Cancel</h4>
+            </button>
+          </div>
+          {isUserEditing && (
+            <button
+              className="m-1 black-button d-flex justify-content-center align-items-center"
+              onClick={handleDeleteProfile}
+            >
+              <h4 className="m-0 p-1">Delete Profile</h4>
+            </button>
+          )}
         </div>
       </div>
 		</div>
