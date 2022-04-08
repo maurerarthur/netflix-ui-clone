@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Profile from '../pages/Profile/Profile'
-import CreateProfile from '../pages/Profile/CreateProfile'
+import Profile from '../pages/Profile'
+import CreateProfile from '../pages/CreateProfile'
+import Browse from '../pages/Browse'
 
 const Router: React.FC = () => {
   return(
@@ -8,6 +9,7 @@ const Router: React.FC = () => {
       <Routes>
         <Route path='/' element={<Profile />} />
         <Route path='/create-profile' element={<CreateProfile />} />
+        <Route path='/browse' element={<Browse />} />
       </Routes>
     </BrowserRouter>
   )

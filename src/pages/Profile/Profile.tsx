@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ProfileContext from '../../context/ProfileContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,8 +14,6 @@ const Profile: React.FC = () => {
 
   const [isManageProfile, setIsManageProfile] = useState<boolean>(false)
 
-  useEffect(() => console.log(profile), [profile]);
-
   const handleUserAccess = (id: number) => {
     dispatchProfile({
       type: 'setProfile',
@@ -23,6 +21,8 @@ const Profile: React.FC = () => {
         id
       }
     })
+
+    navigate('/browse')
   }
 
 	return(
@@ -41,24 +41,23 @@ const Profile: React.FC = () => {
                 <div 
                   className="col-4 col-md-4 d-flex flex-column align-items-center cursor-pointer"
                   key={user.id}
-                  onClick={() => handleUserAccess(user.id)}
+                  onClick={
+                    () => isManageProfile
+                      ? navigate('/create-profile', {
+                          state: {
+                            userState: {
+                              id: user.id,
+                              name: user.name,
+                              avatar: user.avatar
+                            }
+                          }
+                        })
+                      : handleUserAccess(user.id)
+                  }
                 >
                   <div className="d-flex justify-content-center align-items-center position-relative">
                     {isManageProfile && (
-                      <div
-                        className="d-flex justify-content-center align-items-center w-100 h-100 overlay position-absolute"
-                        onClick={() => {
-                          navigate('/create-profile', {
-                            state: {
-                              userState: {
-                                id: user.id,
-                                name: user.name,
-                                avatar: user.avatar
-                              }
-                            }
-                          })
-                        }}
-                      >
+                      <div className="d-flex justify-content-center align-items-center w-100 h-100 overlay position-absolute">
                         <FontAwesomeIcon icon={faPencil} className="white" />
                       </div>
                     )}
