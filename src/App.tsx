@@ -1,6 +1,6 @@
 import { useReducer } from 'react'
 import Router from './router'
-import './App.css'
+import './App.scss'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 import ProfileContext from './context/ProfileContext'

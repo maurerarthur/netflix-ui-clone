@@ -1,7 +1,7 @@
 import { useEffect, useContext, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import axios from 'axios'
 import ProfileContext from '../../context/ProfileContext'
+import { fetchAvatar } from './thunk'
 import Header from '../../components/Header'
 
 const CreateProfile: React.FC = () => {
@@ -33,8 +33,8 @@ const CreateProfile: React.FC = () => {
   }, [])
 
   const generateAvatar = async () => {
-    const avatar = await axios.get('https://source.unsplash.com/random/200x200')
-    setUserAvatar(avatar.request.responseURL)
+    const avatar: any = await fetchAvatar()
+    setUserAvatar(avatar)
   }
 
   const handleAddProfile = () => {
