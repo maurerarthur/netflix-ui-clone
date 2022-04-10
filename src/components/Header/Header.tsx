@@ -5,8 +5,7 @@ import useWindowDimensions from '../../hooks/useWindowDimensions'
 import logo from '../../assets/logo.svg'
 
 const Header: React.FC = () => {
-	const { width } = useWindowDimensions()
-	const isMobile = width < 728
+	const { isSm, isMd, isLg } = useWindowDimensions()
 
   const location = useLocation()
   const isBrowseRoute = location.pathname == '/browse'
@@ -17,14 +16,19 @@ const Header: React.FC = () => {
   return(
 		<div className="w-100 d-flex flex-row justify-content-between align-items-center bg-black">
 			<div className="w-25">
-				{isMobile
-					? <img src={logo} className="w-100 p-3" />
-					: <img src={logo} className="w-50 p-3" />
-				}
+        {isSm && (
+          <img src={logo} className="w-100 p-3" />
+        )}
+        {isMd && (
+          <img src={logo} className="w-50 p-3" />
+        )}
+        {isLg && (
+          <img src={logo} className="w-25 p-3" />
+        )}
 			</div>
       {isBrowseRoute && (
         <div className="d-flex flex-row justify-content-end">
-          <img src={avatar} className="img-fluid rounded w-25 m-1" />
+          <img src={avatar} className="img-fluid rounded w-50 m-1" />
         </div>
       )}
 		</div>

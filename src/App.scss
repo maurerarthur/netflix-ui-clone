@@ -4,12 +4,14 @@
   --black: #000000;
   --white: #FFFFFF;
   --grey: #564D4D;
+  --billboard-height: 500px;
 }
 
 html, body, #root, .App {
   height: 100% !important;
   width: 100% !important;
   background-color: var(--black);
+  overflow-x: hidden;
   font-family: 'Bebas Neue', cursive;
 }
 
@@ -82,4 +84,25 @@ button:disabled {
 .user-avatar {
   width: 120px;
   height: 120px;
+}
+
+.billboard {
+  width: 100%;
+  height: var(--billboard-height);
+  object-fit: contain;
+  z-index: 100;
+}
+
+.billboard-background-blur {
+  position: absolute;
+  width: 100%;
+  height: var(--billboard-height);
+  object-fit: cover;
+  filter: blur(5px);
+  z-index: 99;
+}
+
+.billboard-info {
+  position: absolute;
+  z-index: 101;
 }
