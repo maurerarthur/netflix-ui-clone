@@ -2,6 +2,7 @@ import { useReducer } from 'react'
 import Router from './router'
 import './App.scss'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../node_modules/bootstrap/dist/js/bootstrap.bundle.js'
 
 import ProfileContext from './context/ProfileContext'
 import { ProfileReducer, ProfileInitialState } from './reducer/ProfileReducer'

@@ -17,7 +17,7 @@ const Billboard: React.FC = () => {
 
   return(
     <div className="container-fluid mt-4">
-      <div className="row">
+      <div className="row billboard-container">
         <img
           className="col-12 billboard-background-blur"
           src={billboard?.Poster}
@@ -28,7 +28,7 @@ const Billboard: React.FC = () => {
         />
         <div className="align-self-center m-3 billboard-info">
           <h1 className="white">{billboard?.Title}</h1>
-          <h5 className="white">{billboard?.Year}</h5>
+          <h4 className="white">{billboard?.Year}</h4>
         </div>
       </div>
     </div>
