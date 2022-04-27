@@ -14,8 +14,11 @@ const MovieCarousel: React.FC <{ genre: string }> = ({ genre }) => {
   }, [])
 
   return(
-    <div className="container-fluid mt-4">
+    <div className="container-fluid mt-4 carousel-parent">
       <div className="row">
+        <div className="col-12">
+          <h3 className="mt-4 white carousel-title">{genre.toUpperCase()}</h3>
+        </div>
         <div className="col-12">
           <div className="carousel">
             {movies.map(movie => {
