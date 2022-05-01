@@ -8,7 +8,7 @@ const MovieCarousel: React.FC <{ genre: string }> = ({ genre }) => {
 
   useEffect(() => {
     (async() => {
-      const moviesData = await fetchMovieByGenre(genre)
+      const moviesData: IBillboard[] = await fetchMovieByGenre(genre)
       setMovies(moviesData)
     })()
   }, [])

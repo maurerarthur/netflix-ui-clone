@@ -3,16 +3,18 @@ import { fetchBillboard } from './thunk'
 import randomWords from 'random-words'
 import { IBillboard } from './Interfaces'
 
-const Billboard: React.FC = () => {
-  const [billboard, setBillboard] = useState<IBillboard>()
+const Billboard: React.FC <{ movie?: IBillboard }> = ({ movie }) => {
+  const [billboard, setBillboard] = useState<IBillboard | null>(movie || null)
 
   useEffect(() => {
-    (async () => {
-      const randowMovieTerm = randomWords()
-      const billboardData = await fetchBillboard(randowMovieTerm)
+    if(!movie) {
+      (async () => {
+        const randowMovieTerm: string = randomWords()
+        const billboardData: IBillboard = await fetchBillboard(randowMovieTerm)
 
-      setBillboard(billboardData)
-    })()
+        setBillboard(billboardData)
+      })()
+    }
   }, [])
 
   return(

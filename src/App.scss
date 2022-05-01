@@ -94,6 +94,20 @@ button:disabled {
   color: var(--grey);
 }
 
+.rounded-dark-button {
+  height: 50px;
+  width: 50px;
+  background-color: transparent;
+  color: var(--grey);
+  border-radius: 50px;
+  border: 2px solid var(--grey);
+}
+
+.watch-like-button-clicked {
+  color: var(--white);
+  border-color: var(--white);
+}
+
 .black-button {
   border: var(--grey) 1px solid;
   background-color: transparent;
