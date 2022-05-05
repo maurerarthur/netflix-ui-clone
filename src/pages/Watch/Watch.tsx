@@ -6,6 +6,7 @@ import { IBillboard } from '../../components/Billboard/Interfaces'
 import { IMovieInfo } from './Interfaces'
 import Billboard from '../../components/Billboard'
 import { fetchMovieById } from './thunk'
+import { convertMovieReleaseDateToYear, convertMinutesToHoursAndMinutes } from '../../utils/converters'
 
 const Watch: React.FC = () => {
   const location = useLocation()
@@ -20,11 +21,6 @@ const Watch: React.FC = () => {
       setMovieInfo(movieRequestData)
     })()
   }, [])
-
-  const getMovieReleaseYear = (released: string | any) => {
-    const releasedYear = new Date(released).getFullYear()
-    return releasedYear;
-  }
 
   return(
     <>
@@ -48,7 +44,7 @@ const Watch: React.FC = () => {
           </div>
           <div className="col-12 d-flex flex-row align-items-center">
             <h3 className="white">
-              {getMovieReleaseYear(movieInfo?.Released)} {movieInfo?.Runtime}
+              {convertMovieReleaseDateToYear(movieInfo?.Released)} {convertMinutesToHoursAndMinutes(movieInfo?.Runtime)}
             </h3>
           </div>
         </div>

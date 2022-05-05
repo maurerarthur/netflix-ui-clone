@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router'
 import { fetchBillboard } from './thunk'
 import randomWords from 'random-words'
 import { IBillboard } from './Interfaces'
 
 const Billboard: React.FC <{ movie?: IBillboard }> = ({ movie }) => {
+  const location = useLocation()
+  const isBrowseRoute = location.pathname == '/browse'
+
   const [billboard, setBillboard] = useState<IBillboard | null>(movie || null)
 
   useEffect(() => {
@@ -18,7 +22,7 @@ const Billboard: React.FC <{ movie?: IBillboard }> = ({ movie }) => {
   }, [])
 
   return(
-    <div className="container-fluid mt-4">
+    <div className={`container-fluid mt-4 ${isBrowseRoute ? "cursor-pointer" : ""}`}>
       <div className="row billboard-container">
         <img
           className="col-12 billboard-background-blur"
