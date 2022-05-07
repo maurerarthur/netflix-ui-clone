@@ -11,6 +11,7 @@ const Header: React.FC = () => {
   const location = useLocation()
   const isRootRoute = location.pathname == '/'
   const isBrowseRoute = location.pathname == '/browse'
+  const isWatchRoute = location.pathname == '/watch'
 
   const [profile] = useContext(ProfileContext)
   const { avatar } = profile
@@ -30,7 +31,7 @@ const Header: React.FC = () => {
           )}
         </Link>
 			</div>
-      {isBrowseRoute && (
+      {(isBrowseRoute || isWatchRoute) && (
         <Link to="/">
           <div className="d-flex flex-row justify-content-end">
             <img src={avatar} className="img-fluid rounded w-50 m-1" />

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPlus, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import Header from '../../components/Header'
 import { IBillboard } from '../../components/Billboard/Interfaces'
 import { IMovieInfo } from './Interfaces'
 import Billboard from '../../components/Billboard'
@@ -23,7 +24,8 @@ const Watch: React.FC = () => {
   }, [])
 
   return(
-    <>
+    <div className="d-flex flex-column justify-content-between align-items-center">
+      <Header />
       <Billboard movie={movie} />
       <div className="container-fluid">
         <div className="row">
@@ -49,7 +51,7 @@ const Watch: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

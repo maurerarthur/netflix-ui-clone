@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { fetchBillboard } from './thunk'
 import randomWords from 'random-words'
 import { IBillboard } from './Interfaces'
@@ -7,6 +7,9 @@ import { IBillboard } from './Interfaces'
 const Billboard: React.FC <{ movie?: IBillboard }> = ({ movie }) => {
   const location = useLocation()
   const isBrowseRoute = location.pathname == '/browse'
+  const isWatchRoute = location.pathname == '/watch'
+
+  const navigate = useNavigate()
 
   const [billboard, setBillboard] = useState<IBillboard | null>(movie || null)
 
@@ -21,8 +24,17 @@ const Billboard: React.FC <{ movie?: IBillboard }> = ({ movie }) => {
     }
   }, [])
 
+  const redirectToMovie = () => {
+    navigate('/watch', {
+      state: billboard
+    })
+  }
+
   return(
-    <div className={`container-fluid mt-4 ${isBrowseRoute ? "cursor-pointer" : ""}`}>
+    <div
+      className={`container-fluid mt-4 ${isBrowseRoute ? "cursor-pointer" : ""}`}
+      onClick={!isWatchRoute ? redirectToMovie : undefined}
+    >
       <div className="row billboard-container">
         <img
           className="col-12 billboard-background-blur"
