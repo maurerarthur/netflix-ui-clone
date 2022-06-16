@@ -14,7 +14,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "noImplicitAny": false,
+    "skipDefaultLibCheck": true
   },
   "include": ["src", "services"],
   "references": [{ "path": "./tsconfig.node.json" }]
