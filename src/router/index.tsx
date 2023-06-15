@@ -6,7 +6,7 @@ import Watch from '../pages/Watch'
 
 const Router: React.FC = () => {
   return(
-    <BrowserRouter>
+    <BrowserRouter basename='/netflix-ui-clone/'>
       <Routes>
         <Route path='/' element={<Profile />} />
         <Route path='/create-profile' element={<CreateProfile />} />
