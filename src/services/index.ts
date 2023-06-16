@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL: string = 'http://www.omdbapi.com'
+const URL: string = 'https://www.omdbapi.com'
 const TOKEN: string = '5c08063e'
 
 const api = axios.create({
