@@ -1,10 +1,7 @@
 import axios from 'axios'
 
-const URL: string = 'https://www.omdbapi.com'
-const TOKEN: string = '5c08063e'
-
 const api = axios.create({
-  baseURL: `${URL}/?apiKey=${TOKEN}&`
+  baseURL: `${import.meta.env.VITE_APP_API_URL}/?apiKey=${import.meta.env.VITE_APP_API_TOKEN}&`
 })
 
 export default api

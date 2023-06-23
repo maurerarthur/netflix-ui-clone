@@ -11,6 +11,7 @@ const CreateProfile: React.FC = () => {
   const [, dispatchProfile] = useContext(ProfileContext)
 
   const [isUserEditing, setIsUserEditing] = useState<boolean>(false)
+  const [isAvatarLoading, setIsAvatarLoading] = useState<boolean>(false)
 
   const [userId, setUserId] = useState<string>('')
   const [userName, setUserName] = useState<string>('')
@@ -33,8 +34,12 @@ const CreateProfile: React.FC = () => {
   }, [])
 
   const generateAvatar = async () => {
+    setIsAvatarLoading(true)
+
     const avatar: any = await fetchAvatar()
     setUserAvatar(avatar)
+
+    setIsAvatarLoading(false)
   }
 
   const handleAddProfile = () => {
@@ -80,10 +85,16 @@ const CreateProfile: React.FC = () => {
         <h1 className="white">{isUserEditing ? "Edit Profile" : "Add Profile"}</h1>
         <h4 className="grey">{isUserEditing ? "Edit" : "Add"} a profile for another person watching Netflix.</h4>
         <div className="d-flex flex-row justify-content-between align-items-center">
-          <img
-            src={userAvatar}
-            className="img-fuild rounded user-avatar"
-          />
+          {isAvatarLoading ? (
+            <div className="d-flex flex-row justify-content-center align-items-center user-avatar">
+              <p className="h1 white">...</p>
+            </div>
+          ) : (
+            <img
+              src={userAvatar}
+              className="img-fuild rounded user-avatar"
+            />
+          )}
           <input
             type="text"
             className="w-100 m-2 input-grey"

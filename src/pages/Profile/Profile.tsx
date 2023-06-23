@@ -1,9 +1,13 @@
 import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import ProfileContext from '../../context/ProfileContext'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlus, faPencil } from '@fortawesome/free-solid-svg-icons'
+
 import Header from '../../components/Header'
+
+import ProfileContext from '../../context/ProfileContext'
+
 import { IUser } from './Interfaces'
 
 const Profile: React.FC = () => {
@@ -14,7 +18,7 @@ const Profile: React.FC = () => {
 
   const [isManageProfile, setIsManageProfile] = useState<boolean>(false)
 
-  const handleUserAccess = (id: number) => {
+  const handleUserAccess = (id: string) => {
     dispatchProfile({
       type: 'setProfile',
       payload: {

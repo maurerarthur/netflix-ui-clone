@@ -1,12 +1,16 @@
 import { useContext } from 'react'
-import FavoriteListContext from '../../context/FavoriteListContext'
+
 import Header from '../../components/Header'
 import Billboard from '../../components/Billboard'
 import MovieCarousel from '../../components/MovieCarousel'
 
+import ProfileContext from '../../context/ProfileContext'
+import FavoriteListContext from '../../context/FavoriteListContext'
+
 const Browse: React.FC = () => {
   const terms: string[] = ['Action', 'Crime', 'Comedy', 'Horror', 'Documentary', 'Standup', 'Music', 'Romantic', 'Christmas', 'Drama', 'Animation']
 
+  const [profile] = useContext(ProfileContext)
   const [favorites] = useContext(FavoriteListContext)
 
   return(
@@ -15,7 +19,7 @@ const Browse: React.FC = () => {
       <div className="w-100 h-100 d-flex flex-column justify-content-start align-items-center">
         <Billboard />
         {favorites.list.length > 0 && (
-          <MovieCarousel favorites={favorites.list} />
+          <MovieCarousel favorites={favorites.list.filter(favorite => favorite.profileId == profile.id)} />
         )}
         {terms.map(term => {
           return <MovieCarousel key={term} genre={term} />

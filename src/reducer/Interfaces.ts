@@ -1,22 +1,26 @@
 import { IBillboard } from '../components/Billboard/Interfaces'
 
 export interface IProfileReducerState {
-  id: number,
-	avatar: string | null,
-	name: string | null,
+  id: string
+	avatar: string | null
+	name: string | null
 	users: any[]
 }
 
 export interface IProfileReducerAction {
-	type: string,
+	type: string
 	payload: IProfileReducerState
 }
 
+interface IUserFavoritesReducerState extends IBillboard {
+  profileId: string
+}
+
 export interface IFavoritesReducerState {
-  list: IBillboard[]
+  list: IUserFavoritesReducerState[]
 }
 
 export interface IFavoritesReducerAction {
-  type: string,
-  payload: IBillboard
+  type: string
+  payload: IUserFavoritesReducerState
 }

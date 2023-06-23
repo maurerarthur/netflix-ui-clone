@@ -1,19 +1,27 @@
 import { useState, useEffect, useContext } from 'react'
 import { useLocation } from 'react-router'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPlus, faMinus, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+
 import Header from '../../components/Header'
+import Billboard from '../../components/Billboard'
+
 import { IBillboard } from '../../components/Billboard/Interfaces'
 import { IMovieInfo } from './Interfaces'
-import Billboard from '../../components/Billboard'
+
+import ProfileContext from '../../context/ProfileContext'
 import FavoriteListContext from '../../context/FavoriteListContext'
+
 import { fetchMovieById } from './thunk'
+
 import { convertMovieReleaseDateToYear, convertMinutesToHoursAndMinutes } from '../../utils/converters'
 
 const Watch: React.FC = () => {
   const location = useLocation()
   const movie: IBillboard | any = location.state
 
+  const [profile] = useContext(ProfileContext)
   const [favorites, dispatchFavorites] = useContext(FavoriteListContext)
 
   const [movieInfo, setMovieInfo] = useState<IMovieInfo>()
@@ -32,7 +40,10 @@ const Watch: React.FC = () => {
   const handleAddToFavoriteList = () => {
     dispatchFavorites({
       type: 'addToList',
-      payload: movie
+      payload: {
+        ...movie,
+        profileId: profile.id
+      }
     })
   }
 
