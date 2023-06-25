@@ -13,16 +13,18 @@ const Browse: React.FC = () => {
   const [profile] = useContext(ProfileContext)
   const [favorites] = useContext(FavoriteListContext)
 
+  const favoritesList = favorites.list.filter(favorite => favorite.profileId == profile.id)
+
   return(
     <div className="h-100 d-flex flex-column justify-content-between align-items-center">
       <Header />
       <div className="w-100 h-100 d-flex flex-column justify-content-start align-items-center">
         <Billboard />
-        {favorites.list.length > 0 && (
-          <MovieCarousel favorites={favorites.list.filter(favorite => favorite.profileId == profile.id)} />
+        {favoritesList.length > 0 && (
+          <MovieCarousel carouselClass="favorites" favorites={favoritesList} />
         )}
         {terms.map(term => {
-          return <MovieCarousel key={term} genre={term} />
+          return <MovieCarousel key={term} carouselClass={term} genre={term} />
         })}
       </div>
     </div>
